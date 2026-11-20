@@ -28,6 +28,21 @@
       <div class="action-row">
         <button type="button" id="sendBtn" class="btn-primary">Buka WhatsApp</button>
         <button type="button" id="copyLinkBtn" class="btn-secondary">Salin Link</button>
+        <button type="button" id="qrBtn" class="btn-secondary">Buat QR</button>
+      </div>
+    </section>
+
+    <section id="qrCard" class="card hidden">
+      <div class="section-head">
+        <h2>QR Code WhatsApp</h2>
+        <button type="button" id="closeQrBtn" class="btn-text">Tutup</button>
+      </div>
+      <div class="qr-wrapper">
+        <div class="qr-box">
+          <canvas id="qrCanvas"></canvas>
+        </div>
+        <p id="qrTargetLabel" class="qr-label"></p>
+        <button type="button" id="downloadQrBtn" class="btn-secondary full-btn">Unduh Gambar QR (PNG)</button>
       </div>
     </section>
 
@@ -57,6 +72,7 @@
   </main>
 
   <div id="toast" class="toast"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -27,6 +27,12 @@ const pasteBtn = document.getElementById("pasteBtn");
 const messageInputEl = document.getElementById("messageInput");
 const sendBtn = document.getElementById("sendBtn");
 const copyLinkBtn = document.getElementById("copyLinkBtn");
+const qrBtn = document.getElementById("qrBtn");
+const qrCardEl = document.getElementById("qrCard");
+const closeQrBtn = document.getElementById("closeQrBtn");
+const qrCanvasEl = document.getElementById("qrCanvas");
+const qrTargetLabelEl = document.getElementById("qrTargetLabel");
+const downloadQrBtn = document.getElementById("downloadQrBtn");
 const templateListEl = document.getElementById("templateList");
 const newTplTitleEl = document.getElementById("newTplTitle");
 const newTplTextEl = document.getElementById("newTplText");
@@ -36,6 +42,7 @@ const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 const toastEl = document.getElementById("toast");
 
 let toastTimer = null;
+let currentQrNumber = "";
 
 function showToast(msg) {
   toastEl.textContent = msg;
@@ -195,6 +202,42 @@ copyLinkBtn.addEventListener("click", async () => {
   } catch {
     showToast("Gagal menyalin link");
   }
+});
+
+qrBtn.addEventListener("click", () => {
+  const payload = buildWaLink();
+  if (!payload) return;
+  if (typeof QRious === "undefined") {
+    showToast("Gagal memuat generator QR, cek internet");
+    return;
+  }
+  new QRious({
+    element: qrCanvasEl,
+    value: payload.url,
+    size: 220,
+    level: "M",
+    background: "#ffffff",
+    foreground: "#182026",
+  });
+  currentQrNumber = payload.number;
+  qrTargetLabelEl.textContent = `Tujuan: +${payload.number}`;
+  qrCardEl.classList.remove("hidden");
+  pushHistory(payload.number, payload.text);
+  qrCardEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  showToast("QR Code siap dipindai");
+});
+
+downloadQrBtn.addEventListener("click", () => {
+  if (!currentQrNumber) return;
+  const link = document.createElement("a");
+  link.download = `qr-wa-${currentQrNumber}.png`;
+  link.href = qrCanvasEl.toDataURL("image/png");
+  link.click();
+  showToast("Gambar QR diunduh");
+});
+
+closeQrBtn.addEventListener("click", () => {
+  qrCardEl.classList.add("hidden");
 });
 
 addTplBtn.addEventListener("click", () => {

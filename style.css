@@ -50,6 +50,10 @@ body {
   gap: 16px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .header {
   text-align: center;
   padding: 6px 0 4px;
@@ -126,9 +130,13 @@ textarea {
 
 .action-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-top: 14px;
+}
+
+.action-row .btn-primary {
+  grid-column: 1 / -1;
 }
 
 button {
@@ -169,6 +177,33 @@ button:active {
   color: var(--danger);
   padding: 4px 8px;
   font-size: 0.82rem;
+}
+
+.full-btn {
+  width: 100%;
+}
+
+.qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.qr-box {
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-label {
+  font-size: 0.84rem;
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .section-head {
