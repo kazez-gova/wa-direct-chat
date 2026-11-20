@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WA Direct Chat — Kirim Pesan Tanpa Simpan Nomor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>WA Direct Chat</h1>
+      <p>Kirim pesan WhatsApp instan tanpa menuhin kontak HP</p>
+    </header>
+
+    <section class="card">
+      <label for="phoneInput">Nomor Tujuan</label>
+      <div class="phone-row">
+        <input type="text" id="countryCode" value="62" maxlength="4" aria-label="Kode Negara" />
+        <input type="tel" id="phoneInput" placeholder="Contoh: 0812-3456-7890" autocomplete="off" />
+        <button type="button" id="pasteBtn" class="btn-secondary" title="Tempel dari Clipboard">Tempel</button>
+      </div>
+      <small class="hint">Otomatis rapihin spasi, tanda strip, dan awalan 0 jadi 62</small>
+
+      <label for="messageInput">Isi Pesan</label>
+      <textarea id="messageInput" rows="4" placeholder="Tulis pesan atau pilih template di bawah..."></textarea>
+
+      <div class="action-row">
+        <button type="button" id="sendBtn" class="btn-primary">Buka WhatsApp</button>
+        <button type="button" id="copyLinkBtn" class="btn-secondary">Salin Link</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Template Chat Cepat</h2>
+      </div>
+      <div id="templateList" class="template-grid"></div>
+
+      <details class="add-tpl-box">
+        <summary>+ Tambah Template Baru</summary>
+        <div class="tpl-form">
+          <input type="text" id="newTplTitle" placeholder="Judul singkat, misal: Patokan Alamat" />
+          <textarea id="newTplText" rows="3" placeholder="Isi pesan template..."></textarea>
+          <button type="button" id="addTplBtn" class="btn-secondary">Simpan Template</button>
+        </div>
+      </details>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Riwayat Nomor Terakhir</h2>
+        <button type="button" id="clearHistoryBtn" class="btn-text">Hapus</button>
+      </div>
+      <ul id="historyList" class="history-list"></ul>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
